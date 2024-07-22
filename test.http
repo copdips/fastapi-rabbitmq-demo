@@ -1,0 +1,10 @@
+POST http://localhost:8001/ocr
+Content-Type: multipart/form-data; boundary=boundary123
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY29qYWRpODcyMEB0aWVydmlvLmNvbSIsImVtYWlsIjoiY29qYWRpODcyMEB0aWVydmlvLmNvbSIsImlkIjoyfQ.3Wm8gt0SXJwtw2zUuwwzp5PSLptw4EZ3VfwyC2orbWY
+
+--boundary123
+Content-Disposition: form-data; name="file"; filename="test.png"
+Content-Type: text/plain
+
+< @/home/xiang/git/fastapi-rabbitmq-demo/test.png
+--boundary123--

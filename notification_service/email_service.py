@@ -1,5 +1,6 @@
-import smtplib, os, json
-from email.message import EmailMessage
+import smtplib
+import os
+import json
 from dotenv import load_dotenv
 from email.mime.text import MIMEText
 

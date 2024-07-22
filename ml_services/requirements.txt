@@ -1,6 +1,6 @@
 pika
 pillow
-tensorflow
+tensorflow==2.15.1 # compatible for Python3.11-
 pandas
 python-dotenv
 keras-ocr

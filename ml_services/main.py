@@ -1,14 +1,12 @@
-import pika
 import json
-from utils import OCRService
-from utils import send_email_notification
-from dotenv import load_dotenv
 import os
 
+import pika
+from utils import OCRService, send_email_notification
+
 # Load environment variables
-load_dotenv()
 RABBITMQ_URL = os.environ.get("RABBITMQ_URL")
-    
+
 
 
 

@@ -1,6 +1,6 @@
 # fastapi-microservice-demo
 
-Doc from: <https://snimkar1905.medium.com/building-microservices-with-fastapi-and-rabbitmq-part1-1104dbd4ad96>
+Doc from: [https://snimkar1905.medium.com/building-microservices-with-fastapi-and-rabbitmq-part1-1104dbd4ad96](https://snimkar1905.medium.com/building-microservices-with-fastapi-and-rabbitmq-part1-1104dbd4ad96)
 
 ## This application consists of four main services
 
@@ -49,3 +49,15 @@ pip install -r requirements.txt
 ```bash
 python main.py
 ```
+
+## Local development
+
+```bash
+find . -not -path './.venv/*' -name req*.txt | while read f; do pip install -r $f ; done
+```
+
+## Local test
+
+- RabbitMQ: <http://127.0.0.1:15672/>  (guest:guest)
+- Auth API: <http://127.0.0.1:8000/docs>
+- Gateway API: <http://127.0.0.1:8001/docs>

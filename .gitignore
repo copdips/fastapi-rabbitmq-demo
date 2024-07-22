@@ -170,3 +170,4 @@ testing.db
 PIP_INDEX_URL.secret
 
 celerybeat-schedule.*
+ml_services/artifacts/decoded_file.png

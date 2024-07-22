@@ -1,13 +1,17 @@
-import json
+from dotenv import load_dotenv
+load_dotenv()
+
 import base64
-import pandas as pd
+import json
+
 #keras ocr pipeline and imports
 import keras_ocr
+import pandas as pd
 import pika
 
 
 class OCRService:
-   
+
     def __init__(self):
         self.keras_pipeline = keras_ocr.pipeline.Pipeline()
 
@@ -30,10 +34,10 @@ class OCRService:
         # Assuming file_base64 contains the base64-encoded string
         file_data = base64.b64decode(file_base64.encode())
         # Write the decoded file data to a new file
-        with open('artifacts/decoded_file.png', 'wb') as f:
+        image_path = "artifacts/decoded_file.png"
+        with open(image_path, "wb") as f:
             f.write(file_data)
 
-        image_path = "artifacts/decoded_file.png"
         ocr_text = self.keras_ocr(image_path)
         print(" [^]OCR processing done !!!")
 

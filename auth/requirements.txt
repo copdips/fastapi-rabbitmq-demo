@@ -2,7 +2,6 @@ bcrypt
 cryptography
 email-validator
 fastapi
-passlib
 psycopg2-binary
 pydantic
 pydantic_core

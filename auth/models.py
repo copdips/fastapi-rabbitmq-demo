@@ -1,26 +1,31 @@
 import datetime as _dt
+
+import bcrypt
+import database as _database
 import sqlalchemy as _sql
 import sqlalchemy.orm as _orm
-import passlib.hash as _hash
-from database import Base , engine
-import database as _database
 
-Base.metadata.create_all(engine)
+# from database import Base, engine
+
+# Base.metadata.create_all(engine)
+
 
 class User(_database.Base):
     __tablename__ = "users"
     id = _sql.Column(_sql.Integer, primary_key=True, index=True)
     name = _sql.Column(_sql.String)
     email = _sql.Column(_sql.String, unique=True, index=True)
-    is_verified = _sql.Column(_sql.Boolean , default=False)
+    is_verified = _sql.Column(_sql.Boolean, default=False)
     otp = _sql.Column(_sql.Integer)
     hashed_password = _sql.Column(_sql.String)
     addresses = _orm.relationship("Address", back_populates="user")
     date_created = _sql.Column(_sql.DateTime, default=_dt.datetime.utcnow)
 
     def verify_password(self, password: str):
-        return _hash.bcrypt.verify(password, self.hashed_password)
-
+        return bcrypt.checkpw(
+            password=password.encode("utf-8"),
+            hashed_password=self.hashed_password.encode("utf-8"),
+        )
 
 
 class Address(_database.Base):

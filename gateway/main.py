@@ -1,16 +1,17 @@
-from fastapi import FastAPI, HTTPException ,  File, UploadFile
-import fastapi as _fastapi
-from fastapi.security import OAuth2PasswordBearer
-from dotenv import load_dotenv
-from jwt.exceptions import DecodeError
-from pydantic import BaseModel
-import requests
 import base64
-import pika
 import logging
 import os
+
+import fastapi as _fastapi
 import jwt
+import pika
+import requests
 import rpc_client
+from dotenv import load_dotenv
+from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi.security import OAuth2PasswordBearer
+from jwt.exceptions import DecodeError
+from pydantic import BaseModel
 
 app = FastAPI()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
@@ -45,7 +46,7 @@ async def jwt_validation(token: str = _fastapi.Depends(oauth2_scheme)):
 class GenerateUserToken(BaseModel):
     username: str
     password: str
-   
+
 
 class UserCredentials(BaseModel):
     username: str
@@ -115,7 +116,7 @@ async def verify_otp(user_data:VerifyOtp):
 @app.post('/ocr' ,  tags=['Machine learning Service'] )
 def ocr(file: UploadFile = File(...),
         payload: dict = _fastapi.Depends(jwt_validation)):
-    
+
     # Save the uploaded file to a temporary location
     with open(file.filename, "wb") as buffer:
         buffer.write(file.file.read())
@@ -125,14 +126,14 @@ def ocr(file: UploadFile = File(...),
     with open(file.filename, "rb") as buffer:
         file_data = buffer.read()
         file_base64 = base64.b64encode(file_data).decode()
-    
+
     request_json = {
         'user_name':payload['name'],
         'user_email':payload['email'],
         'user_id':payload['id'],
         'file': file_base64
     }
-   
+
     # Call the OCR microservice with the request JSON
     response = ocr_rpc.call(request_json)
 
@@ -145,4 +146,5 @@ def ocr(file: UploadFile = File(...),
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=5001, reload=True)
+
+    uvicorn.run("main:app", host="0.0.0.0", port=8001, reload=True)

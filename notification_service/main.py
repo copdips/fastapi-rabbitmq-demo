@@ -1,14 +1,13 @@
 import pika
 import sys
 import os
-import time
 import email_service
 from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
 RABBITMQ_URL = os.environ.get("RABBITMQ_URL")
-    
+
 
 def main():
     # rabbitmq connection
@@ -32,7 +31,7 @@ def main():
 
     print("Waiting for messages. To exit press CTRL+C")
 
-    channel.start_consuming()
+    channel.start_consuming() 
 
 
 if __name__ == "__main__":

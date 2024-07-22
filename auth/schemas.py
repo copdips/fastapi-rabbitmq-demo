@@ -1,4 +1,5 @@
 import datetime
+
 import pydantic
 
 
@@ -38,7 +39,7 @@ class GenerateUserToken(pydantic.BaseModel):
 
 class GenerateOtp(pydantic.BaseModel):
     email: str
-    
+
 class VerifyOtp(pydantic.BaseModel):
     email: str
     otp: int
